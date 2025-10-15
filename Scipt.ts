@@ -4,7 +4,7 @@ function main(workbook: ExcelScript.Workbook) {
     let firstWorkSheet = workbook.getActiveWorksheet();
     let i = 1;
     let FirstLibrarianList: string[] = [];
-    let SecondLibrainList: string[] = [];
+    let SecondLibrarinList: string[] = [];
     let ThirdLibrarianList: string[] = [];
     let UnableToPlaceBookList: string[] = [];
     // Loop through values of instances.created_at because it is a gauranteed field that will always be filled
@@ -19,7 +19,7 @@ function main(workbook: ExcelScript.Workbook) {
             } else if (itemLocation === '' || itemLocation === '' || itemLocation === '' || itemLocation === '') {
                 FirstLibrarianList.push('Call Number: ' + firstWorkSheet.getCell(i, 9).getValue().toString() + ' Title: ' + firstWorkSheet.getCell(i, 56).getValue().toString() + ' Barcode: ' + firstWorkSheet.getCell(i, 70).getValue().toString());
             } else if (itemLocation === '' || itemLocation === '' || itemLocation === '' || itemLocation === '' || itemLocation === '' || itemLocation === '' || itemLocation === '' || itemLocation === '' || itemLocation === '' || itemLocation === '' || itemLocation === '' || itemLocation === '' || itemLocation === '' || itemLocation === '' || itemLocation === '') {
-                SecondLibrainList.push('Call Number: ' + firstWorkSheet.getCell(i, 9).getValue().toString() + ' Title: ' + firstWorkSheet.getCell(i, 56).getValue().toString() + ' Barcode: ' + firstWorkSheet.getCell(i, 70).getValue().toString());
+                SecondLibrarinList.push('Call Number: ' + firstWorkSheet.getCell(i, 9).getValue().toString() + ' Title: ' + firstWorkSheet.getCell(i, 56).getValue().toString() + ' Barcode: ' + firstWorkSheet.getCell(i, 70).getValue().toString());
             } else {
                 // This should be everything except refrence and oversized
                 
@@ -38,7 +38,7 @@ function main(workbook: ExcelScript.Workbook) {
                 let callNumberValue = Number(callNumber.split(' ')[0]);
                 // Add based on DDC location
                 if (callNumberValue < 10 || (callNumberValue >= 330 && callNumberValue < 340) || (callNumberValue >= 500 && callNumberValue < 610) || (callNumberValue >= 620 && callNumberValue < 700)) {
-                    SecondLibrainList.push('Call Number: ' + firstWorkSheet.getCell(i, 9).getValue().toString() + ' Title: ' + firstWorkSheet.getCell(i, 56).getValue().toString() + ' Barcode: ' + firstWorkSheet.getCell(i, 70).getValue().toString());
+                    SecondLibrarinList.push('Call Number: ' + firstWorkSheet.getCell(i, 9).getValue().toString() + ' Title: ' + firstWorkSheet.getCell(i, 56).getValue().toString() + ' Barcode: ' + firstWorkSheet.getCell(i, 70).getValue().toString());
                 } else if ((callNumberValue >= 370 && callNumberValue < 380) || (callNumberValue >= 610 && callNumberValue < 620)) {
                     ThirdLibrarianList.push('Call Number: ' + firstWorkSheet.getCell(i, 9).getValue().toString() + ' Title: ' + firstWorkSheet.getCell(i, 56).getValue().toString() + ' Barcode: ' + firstWorkSheet.getCell(i, 70).getValue().toString());
                 } else if (callNumberValue >= 700  || (callNumberValue >= 10 && callNumberValue < 330) || (callNumberValue >= 340 && callNumberValue < 360) || (callNumberValue >= 380 && callNumberValue < 500)) {
@@ -56,8 +56,8 @@ function main(workbook: ExcelScript.Workbook) {
     let emailWorksheet = workbook.getWorksheet("EmailBody");
     let bookListString = '';
     ThirdLibrarianList.forEach(bookRow => bookListString = bookListString + bookRow + '\n');
-    emailWorksheet.getCell(0, 0).setValue('ThirdLibraria');
-    emailWorksheet.getCell(0, 1).setValue('Hi ThirdLibraria, \n Here are the books that were listed as lost or missing in the past month. Let me know if you have any questions. \n' + bookListString);
+    emailWorksheet.getCell(0, 0).setValue('ThirdLibrarian');
+    emailWorksheet.getCell(0, 1).setValue('Hi ThirdLibrarian, \n Here are the books that were listed as lost or missing in the past month. Let me know if you have any questions. \n' + bookListString);
     // Reset string
     bookListString = '';
     FirstLibrarianList.forEach(bookRow => bookListString = bookListString + bookRow + '\n');
@@ -65,9 +65,9 @@ function main(workbook: ExcelScript.Workbook) {
     emailWorksheet.getCell(1, 1).setValue('Hi FirstLibrarian, \n Here are the books that were listed as lost or missing in the past month. Let me know if you have any questions. \n' + bookListString);
     // Reset string
     bookListString = '';
-    SecondLibrainList.forEach(bookRow => bookListString = bookListString + bookRow + '\n');
-    emailWorksheet.getCell(2, 0).setValue('SecondLibrain Email');
-    emailWorksheet.getCell(2, 1).setValue('Hi SecondLibrain, \n Here are the books that were listed as lost or missing in the past month. Let me know if you have any questions. \n' + bookListString);
+    SecondLibrarinList.forEach(bookRow => bookListString = bookListString + bookRow + '\n');
+    emailWorksheet.getCell(2, 0).setValue('SecondLibrarin Email');
+    emailWorksheet.getCell(2, 1).setValue('Hi SecondLibrarin, \n Here are the books that were listed as lost or missing in the past month. Let me know if you have any questions. \n' + bookListString);
     // Reset string
     bookListString = '';
     UnableToPlaceBookList.forEach(bookRow => bookListString = bookListString + bookRow + '\n');
